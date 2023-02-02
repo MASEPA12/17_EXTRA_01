@@ -7,7 +7,6 @@ public class PlayerControllerY : MonoBehaviour
     public bool gameOver;
 
     [SerializeField] private int points;
-
     public float floatForce;
     private float gravityModifier = 1.5f;
     private Rigidbody playerRb;
@@ -54,8 +53,9 @@ public class PlayerControllerY : MonoBehaviour
             Debug.Log("Game Over!");
             Destroy(other.gameObject);
         }
-        else if (other.gameObject.CompareTag("ground"))
+        else if (other.gameObject.CompareTag("GROUND"))
         {
+            gameOver = true;
             Debug.Log("Game Over!");
             Time.timeScale = 0;
         }
