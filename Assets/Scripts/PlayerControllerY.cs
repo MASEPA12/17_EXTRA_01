@@ -71,6 +71,13 @@ public class PlayerControllerY : MonoBehaviour
             fireworksParticle.Play();
             playerAudio.PlayOneShot(moneySound, 1.0f);
             Destroy(other.gameObject);
+        }else if (other.gameObject.CompareTag("SpecialMoney"))
+        {
+            points = points + 5;
+            Debug.Log($"TOTAL SCORE: {points}");
+            fireworksParticle.Play();
+            playerAudio.PlayOneShot(moneySound, 1.0f);
+            Destroy(other.gameObject);
         }
     }
 }

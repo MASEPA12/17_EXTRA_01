@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MoveLeftY : MonoBehaviour
 {
-    public Rigidbody recollectableRb;
     public float speed;
     private PlayerControllerY playerControllerScript;
 
@@ -12,41 +11,22 @@ public class MoveLeftY : MonoBehaviour
     {
         playerControllerScript = FindObjectOfType<PlayerControllerY>();
 
-        recollectableRb = GetComponent<Rigidbody>();
-
-        //Debug.Log($"{transform.position.x}");
-
+        float posOrneg = transform.position.x;
+            //if the object is ini the right side os the screen ex:(14,7,0) 14-14=0
+        if (!playerControllerScript.gameOver && posOrneg - 14 == 0) 
+        {
+            speed = speed * -1;
+            //R to L
+        }
     }
 
     void Update()
     {
-        float posOrneg = transform.position.x;
-
-        //if my x is negative, quan se multipliqui per -1 serà positiva, ha d'anar a la dreta
-        /*if(!playerControllerScript.gameOver && posOrneg * -1 == posOrneg)
-        {
-            transform.Translate(Vector3.left * speed * Time.deltaTime, Space.World);
-            Debug.Log($"va a la esquerra ---{posOrneg}");
-
-            //estava a la dreta, ha d'anar cap a l'esquerra
-        }
-        else */if(!playerControllerScript.gameOver && posOrneg -14 == 0) //es positiva
-        {
-            transform.Translate(Vector3.right * speed * Time.deltaTime, Space.World);
-
-            //estava a l'esquerra, ha d'anar a la dreta
-        }
-
-
-        if (!playerControllerScript.gameOver && posOrneg - 14 != 0) //es negativa
-        {
-            transform.Translate(Vector3.left * speed * Time.deltaTime, Space.World);
-
-            //estava a l'esquerra, ha d'anar a la dreta
-        }
+            //otherwise, if the object is in the left side -14-14 !=0 // L to R
+        transform.Translate(Vector3.right * speed * Time.deltaTime, Space.World);
 
         // If object goes off screen that is NOT the background (is the bomb or the money), destroy it
-        if (transform.position.x < -15 && (gameObject.CompareTag("Money") || gameObject.CompareTag("Bomb")))
+        if ((transform.position.x < -15 || transform.position.x > 15) && (gameObject.CompareTag("Money") || gameObject.CompareTag("Bomb")||gameObject.CompareTag("SpecialMoney")))
         {
             Destroy(gameObject);
         }
