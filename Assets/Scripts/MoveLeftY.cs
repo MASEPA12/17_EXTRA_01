@@ -12,7 +12,9 @@ public class MoveLeftY : MonoBehaviour
         playerControllerScript = FindObjectOfType<PlayerControllerY>();
 
         float posOrneg = transform.position.x;
-            //if the object is ini the right side os the screen ex:(14,7,0) 14-14=0
+
+            /*if the object is in the right side of the screen {ex:(14,7,0) 14-14=0}
+            vector left is multiplied by the inverted sign of the speed*/
         if (!playerControllerScript.gameOver && posOrneg - 14 == 0) 
         {
             speed = speed * -1;

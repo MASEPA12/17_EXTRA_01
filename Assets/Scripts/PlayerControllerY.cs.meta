@@ -7,6 +7,7 @@ MonoImporter:
   - explosionParticle: {fileID: 19821056, guid: 079954accd64b32419ec069129c81273, type: 3}
   - fireworksParticle: {fileID: 19860484, guid: 6586ff0f14125534cae2f5d8f04b7871, type: 3}
   - moneySound: {fileID: 8300000, guid: af9f934eb4288464eb120a5857921cc3, type: 3}
+  - powerUpSound: {fileID: 8300000, guid: 2bdc03a614f78b34aa08e4e1cbb21294, type: 3}
   - explodeSound: {fileID: 8300000, guid: 774ebc5c074ce4695b7cc310fbd44087, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}

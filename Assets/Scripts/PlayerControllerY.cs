@@ -16,6 +16,7 @@ public class PlayerControllerY : MonoBehaviour
 
     private AudioSource playerAudio;
     public AudioClip moneySound;
+    public AudioClip powerUpSound;
     public AudioClip explodeSound;
 
 
@@ -24,19 +25,20 @@ public class PlayerControllerY : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         Physics.gravity *= gravityModifier;
         playerAudio = GetComponent<AudioSource>();
+
         // Apply a small upward force at the start of the game
-        //playerRb.AddForce(Vector3.up * 5, ForceMode.Impulse);
+        playerRb.AddForce(Vector3.up * 5, ForceMode.Impulse);
     }
 
     void Update()
     {
-        // While space is pressed and player is low enough, float up
+        //MOVEMENT; If space is pressed and player is low enough, float up
         if (Input.GetKeyDown(KeyCode.Space) && !gameOver)
         {
             playerRb.AddForce(Vector3.up * floatForce, ForceMode.Impulse);
         }
-        //if the y pos is lower than 0 or greater than 16, rigidbody velocity is 0
-        if (transform.position.y > 16)
+        //UPPER LIMIT; if the y pos is greater than 8, rigidbody velocity is 0
+        if (transform.position.y > 8)
         {
             playerRb.velocity = new Vector3(0, 0, 0);
         }
@@ -53,6 +55,7 @@ public class PlayerControllerY : MonoBehaviour
             Debug.Log("Game Over!");
             Destroy(other.gameObject);
         }
+        //if player collides with the ground, explode and set gameOver to true
         else if (other.gameObject.CompareTag("GROUND"))
         {
             gameOver = true;
@@ -71,12 +74,14 @@ public class PlayerControllerY : MonoBehaviour
             fireworksParticle.Play();
             playerAudio.PlayOneShot(moneySound, 1.0f);
             Destroy(other.gameObject);
-        }else if (other.gameObject.CompareTag("SpecialMoney"))
+        }
+        //if player collides with money, +5 points, special sound, fireworks
+        else if (other.gameObject.CompareTag("SpecialMoney"))
         {
             points = points + 5;
             Debug.Log($"TOTAL SCORE: {points}");
             fireworksParticle.Play();
-            playerAudio.PlayOneShot(moneySound, 1.0f);
+            playerAudio.PlayOneShot(powerUpSound, 1.0f);
             Destroy(other.gameObject);
         }
     }

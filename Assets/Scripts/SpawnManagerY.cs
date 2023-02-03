@@ -11,20 +11,18 @@ public class SpawnManagerY : MonoBehaviour
 
     void Start()
     {
+        //SPAWN RANDOM RECOLLECTABLES EVERY CERTAIN TIME
         InvokeRepeating("SpawnObjects", spawnDelay, spawnInterval);
         playerControllerScript = FindObjectOfType<PlayerControllerY>();
     }
 
-    // Spawn obstacles
     void SpawnObjects()
     {
-        // Set random spawn location and random object index
-        // x= random number between A, B --> A=random number between -14,-12 / B=random btween 12,14
-
+        //creatoin of two (right and left) new vectors with random high (y axis) 
         Vector3 spawnLocationR = new Vector3(-14, Random.Range(-7, 7), 0);
         Vector3 spawnLocationL = new Vector3(14, Random.Range(-7, 7), 0);
         
-
+        //set random index (for spawning a random obstacle)
         int index = Random.Range(0, objectPrefabs.Length);
         
         // If game is still active, spawn new object
